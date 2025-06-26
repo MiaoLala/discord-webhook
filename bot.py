@@ -24,6 +24,7 @@ async def on_message(message):
     
         if channel_id == 1387409881237028974:
             if user_message == "會議通知":
+                await message.channel.send("查詢中請稍後...")  # 先回覆提示訊息
                 dc_id = message.author.id
                 reply_text = get_meeting_notification_by_dc_id(dc_id)
                 await message.channel.send(reply_text)
