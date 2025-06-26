@@ -2,6 +2,8 @@ import os
 import discord
 
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+ALLOWED_CHANNEL_ID = int(1387409881237028974)  # 你的頻道ID（整數）
+
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -17,6 +19,9 @@ async def on_ready():
 async def on_message(message):
     if message.author == bot.user:
         return
+
+    if message.channel.id != ALLOWED_CHANNEL_ID:
+    return  # 不在指定頻道就忽略
 
     user_message = message.content.strip()
 
