@@ -38,7 +38,7 @@ async def on_message(message):
             # 其他頻道不回應或給通用訊息
             pass
     except Exception as e:
-    logger.error(f"on_message 發生錯誤: {e}", exc_info=True)
+        logger.error(f"on_message 發生錯誤: {e}", exc_info=True)
 
 if __name__ == "__main__":
     bot.run(DISCORD_TOKEN)
