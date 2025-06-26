@@ -20,25 +20,16 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    channel_id = message.channel.id
     user_message = message.content.strip()
-    await message.channel.send("請稍後...")
 
-    if channel_id == 1387409881237028974:
-        if user_message == "會議通知":
-            await message.channel.send("查詢中請稍後...")  # 先回覆提示訊息
-            dc_id = message.author.id
-            reply_text = get_meeting_notification_by_dc_id(dc_id)
-            await message.channel.send(reply_text)
-        elif user_message == "我要綁定":
-            await message.channel.send("請輸入格式：員編：XXXX，進行綁定")
-        elif user_message.startswith("員編："):
-            await message.channel.send(f"✅ 綁定成功：{user_message}")
-        else:
-            await message.channel.send("❓ 指令錯誤，請重試")
+    if user_message == "會議通知":
+        await message.channel.send("📢 這是會議通知訊息（可整合 Notion 資料）")
+    elif user_message == "我要綁定":
+        await message.channel.send("請輸入格式：員編：XXXX，進行綁定")
+    elif user_message.startswith("員編："):
+        await message.channel.send(f"✅ 綁定成功：{user_message}")
     else:
-        # 其他頻道不回應或給通用訊息
-        pass
+        await message.channel.send("❓ 指令錯誤，請重試")
 
 if __name__ == "__main__":
     bot.run(DISCORD_TOKEN)
