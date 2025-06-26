@@ -2,8 +2,6 @@ import os
 import discord
 
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-ALLOWED_CHANNEL_ID = int(1387409881237028974)  # 你的頻道ID（整數）
-
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -19,22 +17,24 @@ async def on_ready():
 async def on_message(message):
     if message.author == bot.user:
         return
-
-    if message.channel.id != ALLOWED_CHANNEL_ID:
-    return  # 不在指定頻道就忽略
-
+        
+    channel_id = message.channel.id
     user_message = message.content.strip()
 
-    if user_message == "會議通知":
-        dc_id = message.author.id
-        reply_text = get_meeting_notification_by_dc_id(dc_id)
-        await message.channel.send(reply_text)
-    elif user_message == "我要綁定":
-        await message.channel.send("請輸入格式：員編：XXXX，進行綁定")
-    elif user_message.startswith("員編："):
-        await message.channel.send(f"✅ 綁定成功：{user_message}")
+    if channel_id == 1387409881237028974:
+        if user_message == "會議通知":
+            dc_id = message.author.id
+            reply_text = get_meeting_notification_by_dc_id(dc_id)
+            await message.channel.send(reply_text)
+        elif user_message == "我要綁定":
+            await message.channel.send("請輸入格式：員編：XXXX，進行綁定")
+        elif user_message.startswith("員編："):
+            await message.channel.send(f"✅ 綁定成功：{user_message}")
+        else:
+            await message.channel.send("❓ 指令錯誤，請重試")
     else:
-        await message.channel.send("❓ 指令錯誤，請重試")
+        # 其他頻道不回應或給通用訊息
+        pass
 
 if __name__ == "__main__":
     bot.run(DISCORD_TOKEN)
