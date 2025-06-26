@@ -7,7 +7,7 @@ import discord
 
 # 環境變數設定
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-DISCORD_CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID"))
+DISCORD_CHANNEL_ID = int(1387409881237028974)  # int(os.getenv("DISCORD_CHANNEL_ID"))
 
 intents = discord.Intents.default()
 intents.messages = True
