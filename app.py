@@ -1,9 +1,4 @@
-import logging
 from flask import Flask
-
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
