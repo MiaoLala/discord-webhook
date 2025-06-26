@@ -1,34 +1,11 @@
-import os
-import discord
+from flask import Flask
 
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-DISCORD_CHANNEL_ID = int(1387409881237028974) # int(os.getenv("DISCORD_CHANNEL_ID"))
+app = Flask(__name__)
 
-intents = discord.Intents.default()
-intents.messages = True
-intents.message_content = True
-
-bot = discord.Client(intents=intents)
-
-@bot.event
-async def on_ready():
-    print(f"✅ Discord Bot 上線：{bot.user}")
-
-@bot.event
-async def on_message(message):
-    if message.author == bot.user:
-        return
-
-    user_message = message.content.strip()
-
-    if user_message == "會議通知":
-        await message.channel.send("📢 這是會議通知訊息（可整合 Notion 資料）")
-    elif user_message == "我要綁定":
-        await message.channel.send("請輸入格式：員編：XXXX，進行綁定")
-    elif user_message.startswith("員編："):
-        await message.channel.send(f"✅ 綁定成功：{user_message}")
-    else:
-        await message.channel.send("❓ 指令錯誤，請重試")
+@app.route("/")
+def home():
+    return "Discord Flask Web Server Running!"
 
 if __name__ == "__main__":
-    bot.run(DISCORD_TOKEN)
+    import os
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
