@@ -9,7 +9,6 @@ intents.message_content = True
 
 bot = discord.Client(intents=intents)
 
-
 @bot.event
 async def on_ready():
     print(f"✅ Discord Bot 上線：{bot.user}")
