@@ -19,7 +19,9 @@ async def on_message(message):
         return
 
     user_message = message.content.strip()
-
+    
+    await message.channel.send("📢 測試進入")
+    
     if user_message == "會議通知":
         await message.channel.send("📢 這是會議通知訊息（可整合 Notion 資料）")
     elif user_message == "我要綁定":
