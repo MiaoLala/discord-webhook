@@ -1,5 +1,6 @@
 import os
 import discord
+import logging
 
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
@@ -9,19 +10,22 @@ intents.message_content = True
 
 bot = discord.Client(intents=intents)
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 @bot.event
 async def on_ready():
-    print(f"✅ Discord Bot 上線：{bot.user}")
+    logger.info(f"✅ Discord Bot 上線：{bot.user}")
 
 @bot.event
 async def on_message(message):
     try:
         if message.author == bot.user:
             return
-            
+
         channel_id = message.channel.id
         user_message = message.content.strip()
-    
+
         if channel_id == 1387409881237028974:
             if user_message == "會議通知":
                 await message.channel.send("查詢中請稍後...")  # 先回覆提示訊息
