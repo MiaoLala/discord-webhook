@@ -1,6 +1,7 @@
 import os
 import discord
 import logging
+from meeting_notify import get_meeting_notification_by_dc_id
 
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
