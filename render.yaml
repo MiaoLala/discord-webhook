@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: discord-bot
+    name: flask-web
     env: python
     plan: free
     buildCommand: ""
@@ -8,5 +8,13 @@ services:
     envVars:
       - key: DISCORD_TOKEN
         sync: false
-      - key: DISCORD_CHANNEL_ID
+
+  - type: worker
+    name: discord-bot
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python bot.py
+    envVars:
+      - key: DISCORD_TOKEN
         sync: false
