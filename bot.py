@@ -26,7 +26,9 @@ async def on_message(message):
     user_message = message.content.strip()
 
     if user_message == "會議通知":
-        await message.channel.send("📢 這是會議通知訊息（可整合 Notion 資料）")
+        dc_id = message.author.id
+        reply_text = get_meeting_notification_by_dc_id(dc_id)
+        await message.channel.send(reply_text)
     elif user_message == "我要綁定":
         await message.channel.send("請輸入格式：員編：XXXX，進行綁定")
     elif user_message.startswith("員編："):
