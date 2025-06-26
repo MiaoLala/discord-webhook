@@ -26,6 +26,7 @@ async def on_message(message):
 
         channel_id = message.channel.id
         user_message = message.content.strip()
+        await message.channel.send("請稍後...")
 
         if channel_id == 1387409881237028974:
             if user_message == "會議通知":
